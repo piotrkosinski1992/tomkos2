@@ -1,0 +1,35 @@
+<mat-toolbar color="primary">
+  <div>
+    <button mat-button routerLink="['/']">
+      <mat-icon class="home-icon" aria-label="Home">store</mat-icon>
+    </button>
+  </div>
+  <div fxFlex>
+    <ul fxLayout fxLayoutGap="10px">
+      <li class="navigation-item">
+        <a>
+          <mat-form-field class="search-form-field">
+            <input class="search-input" matInput type="text" #input>
+            <button mat-raised-button (click)="onSearchClick(input.value)"
+            [routerLink]="['/products']">Search</button>
+          </mat-form-field>
+        </a>
+      </li>
+      <div fxFlex fxLayoutAlign="flex-end" class="right-menu-items">
+        <div *ngIf="authService.isLoggedIn()">
+          <li class="navigation-item">
+            <button mat-button>
+              <mat-icon aria-label="Cart">shopping_cart</mat-icon>
+            </button>
+          </li>
+          <li class="navigation-item" (click)="onLogout()">
+            <a routerLink="/logout">Logout</a>
+          </li>
+        </div>
+        <li class="navigation-item" *ngIf="!authService.isLoggedIn()">
+          <a routerLink="/login">Login</a>
+        </li>
+      </div>
+    </ul>
+  </div>
+</mat-toolbar>
