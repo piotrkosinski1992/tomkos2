@@ -20,4 +20,8 @@ public class Money {
   public BigDecimal getValue() {
     return value;
   }
+
+  public String getStringValue() {
+    return value.toString();
+  }
 }

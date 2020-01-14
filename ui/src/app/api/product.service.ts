@@ -14,7 +14,7 @@ export class ProductService {
   }
 
   searchProductsByPhrase(phrase: string) {
-    this.http.post('http://localhost:7777/api/product/like/' + phrase, null).subscribe(
+    this.http.get('http://localhost:7777/api/product/like/' + phrase).subscribe(
       (products: Product[]) => this.subject.next(products)
     );
   }

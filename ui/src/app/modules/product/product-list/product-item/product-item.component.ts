@@ -11,9 +11,9 @@ export class ProductItemComponent implements OnInit {
   @Input()
   product: Product;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
-
 }

@@ -6,6 +6,14 @@ import {LogoutComponent} from "./logout/logout.component";
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent},
+  /*  {
+      path: '', canActivate: [AuthGuard], children: [
+        {
+          path: 'products',
+          loadChildren: 'src/app/modules/product/product.module#ProductModule'
+        },
+      ]
+    }*/
 ];
 
 

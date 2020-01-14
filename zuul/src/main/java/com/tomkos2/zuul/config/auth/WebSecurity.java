@@ -16,46 +16,48 @@ import org.springframework.web.filter.CorsFilter;
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
-  private final Environment environment;
+    private final Environment environment;
 
-  public WebSecurity(Environment environment) {
-    this.environment = environment;
-  }
+    public WebSecurity(Environment environment) {
+        this.environment = environment;
+    }
 
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
 
-    http
-/*        .cors()
-        .and()
-        .csrf().disable()
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and()*/
-        .authorizeRequests()
-        .antMatchers(HttpMethod.POST, "/api/user/**").permitAll()
-        .anyRequest().authenticated()
-        .and()
-        .addFilter(new AuthenticationFilter(authenticationManager(), environment));
-    http.headers().frameOptions().disable();
+        http
+          .cors()
+          .and()
+          .csrf().disable()
+          .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+          .and()
+          .authorizeRequests()
+          .antMatchers("/**").permitAll()
+          .antMatchers(HttpMethod.POST, "/api/user/**").permitAll()
+          .antMatchers("/api/product/**").permitAll()
+          .anyRequest().authenticated()
+          .and()
+          .addFilter(new AuthenticationFilter(authenticationManager(), environment));
+        http.headers().frameOptions().disable();
 
-    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-  }
+    }
 
-  @Bean
-  public CorsFilter corsFilter() {
-    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    CorsConfiguration config = new CorsConfiguration();
-    config.setAllowCredentials(true);
-    config.addAllowedOrigin("*");
-    config.addAllowedHeader("*");
-    config.addAllowedMethod("OPTIONS");
-    config.addAllowedMethod("GET");
-    config.addAllowedMethod("POST");
-    config.addAllowedMethod("PUT");
-    config.addAllowedMethod("DELETE");
-    source.registerCorsConfiguration("/**", config);
-    return new CorsFilter(source);
-  }
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("OPTIONS");
+        config.addAllowedMethod("GET");
+        config.addAllowedMethod("POST");
+        config.addAllowedMethod("PUT");
+        config.addAllowedMethod("DELETE");
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
+    }
 
 }
