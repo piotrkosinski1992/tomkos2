@@ -1,3 +1,2 @@
-upiększyć wyświetlanie produktów z searchu
-dodać defaultowy obrazek gdy nie znajdzie nic
-zakaz wysłania pustego requesta?
+do cart dostarczam cartItems, teraz ładnie je wyświetlić, z możliwością usunięcia produktu z cart
+GL HF

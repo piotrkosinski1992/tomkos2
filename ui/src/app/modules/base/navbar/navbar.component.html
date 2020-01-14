@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <div>
-    <button mat-button routerLink="['/']">
+    <button mat-button [routerLink]="['/']">
       <mat-icon class="home-icon" aria-label="Home">store</mat-icon>
     </button>
   </div>
@@ -11,14 +11,17 @@
           <mat-form-field class="search-form-field">
             <input class="search-input" matInput type="text" #input>
             <button mat-raised-button (click)="onSearchClick(input.value)"
-            [routerLink]="['/products']">Search</button>
+                    [routerLink]="['/products']"
+                    [queryParams]="{phrase: input.value}"
+                    [disabled]="isInputEmpty(input.value)">Search
+            </button>
           </mat-form-field>
         </a>
       </li>
       <div fxFlex fxLayoutAlign="flex-end" class="right-menu-items">
         <div *ngIf="authService.isLoggedIn()">
-          <li class="navigation-item">
-            <button mat-button>
+          <li class="navigation-item" *ngIf="authService.isLoggedIn()">
+            <button mat-button [routerLink]="['/cart']">
               <mat-icon aria-label="Cart">shopping_cart</mat-icon>
             </button>
           </li>

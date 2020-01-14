@@ -1,0 +1,27 @@
+.img {
+  margin-top: 25px;
+  max-width: 150px;
+  width: 80%;
+  border-radius: 25px;
+}
+
+.button-container {
+  height: 40px;
+
+  .button {
+    height: 100%;
+    width: 60%;
+  }
+}
+
+.amount-container {
+  height: 40px;
+
+  .amount-box {
+    border: 1px solid lightblue;
+    border-radius: 5px;
+    height: 100%
+  }
+}
+
+

@@ -22,4 +22,8 @@ export class NavbarComponent implements OnInit {
   onSearchClick(phrase: string) {
     this.productService.searchProductsByPhrase(phrase)
   }
+
+  isInputEmpty(value: string) {
+    return value.length == 0
+  }
 }

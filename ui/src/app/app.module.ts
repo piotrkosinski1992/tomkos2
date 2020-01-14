@@ -9,6 +9,7 @@ import {ProductModule} from "./modules/product/product.module";
 import {ProductService} from "./api/product.service";
 import {AuthInterceptor} from "./modules/base/login/auth-interceptor.service";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {CartModule} from "./modules/cart/cart.module";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
     AppRoutingModule,
     BrowserAnimationsModule,
     BaseModule,
-    ProductModule
+    ProductModule,
+    CartModule
   ],
   providers: [ProductService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

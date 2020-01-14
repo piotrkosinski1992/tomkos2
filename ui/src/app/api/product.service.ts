@@ -1,20 +1,20 @@
 import {Injectable} from '@angular/core';
-import {Subject} from "rxjs";
-import {Product} from "../modules/product/product";
 import {HttpClient} from "@angular/common/http";
+import {BehaviorSubject} from "rxjs";
+import {Product} from "../modules/product/product";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  private subject = new Subject<Product[]>();
+  private subject = new BehaviorSubject<Product[]>([]);
 
   constructor(private http: HttpClient) {
   }
 
   searchProductsByPhrase(phrase: string) {
-    this.http.get('http://localhost:7777/api/product/like/' + phrase).subscribe(
+    this.http.get<Product[]>('/v1/api/product/like/' + phrase).subscribe(
       (products: Product[]) => this.subject.next(products)
     );
   }

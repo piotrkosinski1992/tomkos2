@@ -36,6 +36,12 @@ public class ProductUsecase {
   }
 
   public List<Product> findLike(String phrase) {
-    return repository.findByNameContainingIgnoreCase(phrase);
+    return repository.findByNameContainingIgnoreCase(phrase).stream()
+        .filter(this::isAvailableInStock)
+        .collect(Collectors.toList());
+  }
+
+  public List<Product> findAllBy(List<Long> productIds) {
+    return repository.findAllById(productIds);
   }
 }

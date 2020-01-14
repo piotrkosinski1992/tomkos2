@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {Product} from "../product";
+import {CartService} from "../../../api/cart.service";
+import {Location} from "@angular/common"
 
 @Component({
   selector: 'app-product-details',
@@ -8,11 +11,20 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ProductDetailsComponent implements OnInit {
 
-  id: string;
-  constructor(private activatedRoute: ActivatedRoute) { }
+  product: Product;
+  constructor(private activatedRoute: ActivatedRoute, private location: Location, private cartService: CartService) { }
 
   ngOnInit() {
-    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.activatedRoute.params.subscribe((product: Product) => {
+      this.product = product
+    });
   }
 
+  onBuyClick(amount: string) {
+    this.cartService.addToCart(this.product.id, amount);
+  }
+
+  onBackClick() {
+    this.location.back();
+  }
 }
