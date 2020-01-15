@@ -49,7 +49,7 @@ public class CartUsecase {
     List<Long> ids = cart.getProducts().stream().map(Product::getId)
         .collect(Collectors.toList());
     List<ProductDTO> productsInfo = restTemplate
-        .postForObject("http://product/id/all", ids, ProductsDTO.class).getProducts();
+        .postForObject("http://product/ids", ids, ProductsDTO.class).getProducts();
 
     return productsInfo.stream()
         .map(product -> addProductAmount(product, cart.getProducts()))
@@ -68,5 +68,14 @@ public class CartUsecase {
     return repository.findByUsername(userInfo.getUsername())
         .orElseThrow(() -> new RuntimeException(
             "No cart available for given username: " + userInfo.getUsername()));
+  }
+
+  //TODO tu może się stać że usunie z koszyka a nie usunie z inventory
+  @Transactional
+  public void deleteProductById(Long id, UserInfo userInfo) {
+    //TODO zwracanie do inventoy
+      Cart cart = findByUsername(userInfo);
+
+      cart.deleteFromCartById(id);
   }
 }

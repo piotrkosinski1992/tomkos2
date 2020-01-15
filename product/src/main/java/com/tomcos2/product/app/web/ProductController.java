@@ -32,7 +32,7 @@ public class ProductController {
     return mapper.toDTO(usecase.findById(id));
   }
 
-  @PostMapping("/id/all")
+  @PostMapping("/ids")
   public ProductsDTO findAllById(@RequestBody List<Long> productIds) {
     return new ProductsDTO(usecase.findAllBy(productIds).stream()
         .map(mapper::toDTO)

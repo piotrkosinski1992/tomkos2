@@ -69,4 +69,9 @@ public class Cart {
   public int hashCode() {
     return Objects.hash(id);
   }
+
+  public void deleteFromCartById(Long id) {
+    this.products = products.stream().filter((Product product) -> !product.getId().equals(id))
+      .collect(Collectors.toSet());
+  }
 }

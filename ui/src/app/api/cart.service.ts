@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +11,16 @@ export class CartService {
 
   addToCart(id: string, amount: string) {
     this.http.post('/v1/api/cart/add', {id: id, amount: amount}).subscribe(
-      () => alert("Product added to cart!"),
+      () => alert('Product added to cart!'),
       error => alert(error.error.message)
     );
   }
 
   getCartProducts() {
-    this.http.get('/v1/api/cart/all').subscribe(
-      response => console.log(response),
-      error => console.log(error)
-    );
+    return this.http.get('/v1/api/cart/all');
+  }
+
+  deleteByProductId(id: number) {
+    this.http.delete('/v1/api/cart/' + id).subscribe();
   }
 }
