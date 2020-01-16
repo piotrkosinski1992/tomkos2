@@ -26,5 +26,10 @@ public class InventoryController {
   @GetMapping("/isbn/{isbn}/instock")
   public boolean isProductInStock(@PathVariable String isbn) {
     return usecase.isBookInStock(isbn);
+
+
+  @PostMapping("/return")
+  public void returnProduct(@RequestBody Product product) {
+    usecase.returnProduct(product);
   }
 }

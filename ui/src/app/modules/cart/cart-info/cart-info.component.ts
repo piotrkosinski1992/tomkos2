@@ -12,18 +12,27 @@ export class CartInfoComponent implements OnInit {
 
   dataSource = new MatTableDataSource<Book>();
   displayedColumns = ['id', 'name', 'price', 'amount', 'button'];
+  total = 0;
 
   constructor(private cartService: CartService) {
   }
 
   ngOnInit() {
     this.cartService.getCartBooks().subscribe(
-      (books: any) => this.dataSource.data = books
+      (books: any) => {
+        this.dataSource.data = books;
+        this.total = this.calculatePrice()
+      }
     );
   }
 
   onDeleteItem(isbn: string) {
     this.cartService.deleteByIsbn(isbn);
     window.location.reload();
+  }
+
+  calculatePrice() {
+    return this.dataSource.data.map(product => product.amount * product.price)
+    .reduce((sum, current) => sum + current);
   }
 }

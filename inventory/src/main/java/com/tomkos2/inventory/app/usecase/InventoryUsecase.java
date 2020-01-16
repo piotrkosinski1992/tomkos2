@@ -27,4 +27,11 @@ public class InventoryUsecase {
     private Book findById(String isbn) {
         return new Book(isbn, Long.valueOf(isbn.substring(isbn.length() - 1)));
     }
+
+  @Transactional
+  public void returnProduct(Product product) {
+    Product dbProduct = findById(product.getId());
+
+    dbProduct.increaseAmount(product.getAmount());
+  }
 }
