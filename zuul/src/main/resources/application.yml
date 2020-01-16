@@ -9,9 +9,9 @@ zuul:
   sensitiveHeaders: Cookie,Set-Cookie
   prefix: /api
   routes:
-    product:
-      path: /product/**
-      serviceId: product
+    book:
+      path: /book/**
+      serviceId: book
     inventory:
       path: /inventory/**
       serviceId: inventory

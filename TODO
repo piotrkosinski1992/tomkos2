@@ -1,2 +1,1 @@
-z możliwością usunięcia produktu z cart  zwracanie do inventoy!!
-GL HF
+tutaj brakuje rzeczy z obiektów zwracanych z externala return usecase.findLike(phrase).stream()

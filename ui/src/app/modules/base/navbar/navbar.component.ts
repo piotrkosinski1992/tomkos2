@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../../../api/auth.service";
-import {ProductService} from "../../../api/product.service";
+import {AuthService} from '../../../api/auth.service';
+import {BookService} from '../../../api/book.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,21 +9,21 @@ import {ProductService} from "../../../api/product.service";
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private authService: AuthService, private productService: ProductService) {
+  constructor(private authService: AuthService, private bookService: BookService) {
   }
 
   ngOnInit() {
   }
 
   onLogout() {
-    this.authService.logout()
+    this.authService.logout();
   }
 
   onSearchClick(phrase: string) {
-    this.productService.searchProductsByPhrase(phrase)
+    this.bookService.searchBooksByPhrase(phrase);
   }
 
   isInputEmpty(value: string) {
-    return value.length == 0
+    return value.length === 0;
   }
 }

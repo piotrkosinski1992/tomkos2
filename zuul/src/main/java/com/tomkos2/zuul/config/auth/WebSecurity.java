@@ -34,7 +34,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
           .authorizeRequests()
           .antMatchers("/**").permitAll()
           .antMatchers(HttpMethod.POST, "/api/user/**").permitAll()
-          .antMatchers("/api/product/**").permitAll()
+          .antMatchers("/api/book/**").permitAll()
           .anyRequest().authenticated()
           .and()
           .addFilter(new AuthenticationFilter(authenticationManager(), environment));

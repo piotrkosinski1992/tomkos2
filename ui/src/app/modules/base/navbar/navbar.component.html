@@ -11,7 +11,7 @@
           <mat-form-field class="search-form-field">
             <input class="search-input" matInput type="text" #input>
             <button mat-raised-button (click)="onSearchClick(input.value)"
-                    [routerLink]="['/products']"
+                    [routerLink]="['/books']"
                     [queryParams]="{phrase: input.value}"
                     [disabled]="isInputEmpty(input.value)">Search
             </button>

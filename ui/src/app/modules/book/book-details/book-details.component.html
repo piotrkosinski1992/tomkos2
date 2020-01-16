@@ -1,0 +1,38 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{bookDetails.title}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content fxLayout>
+    <div fxFlex="30%">
+      <img class="img" src="assets/guitar.jpg">
+    </div>
+    <div fxFlex="70%">
+      <mat-list role="list">
+        <mat-list-item role="listitem">
+          <div fxFlex="30%"><strong>Description: </strong></div>
+          <div fxFlex>{{bookDetails.desc}}</div>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <div fxFlex="30%"><strong>Price: </strong></div>
+          <div fxFlex>{{bookDetails.price}}</div>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <div fxFlex="30%" class="button-container">
+            <button class="button" color="primary" mat-raised-button
+                    (click)="onBuyClick(amount.value)">Buy
+            </button>
+          </div>
+          <div class="amount-container" fxFlex="30%">
+            <input class="amount-box" value="1" type="number" matInput #amount>
+          </div>
+        </mat-list-item>
+        <mat-list-item>
+          <div>
+            <button color="warn" mat-raised-button fxFlex="30%" (click)="onBackClick()">Back</button>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </mat-card-content>
+</mat-card>
+

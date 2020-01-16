@@ -9,18 +9,18 @@ export class CartService {
   constructor(private http: HttpClient) {
   }
 
-  addToCart(id: string, amount: string) {
-    this.http.post('/v1/api/cart/add', {id: id, amount: amount}).subscribe(
-      () => alert('Product added to cart!'),
+  addToCart(isbn: string, amount: string) {
+    this.http.post('/v1/api/cart/add', {isbn: isbn, amount: amount}).subscribe(
+      () => alert('Book added to cart!'),
       error => alert(error.error.message)
     );
   }
 
-  getCartProducts() {
+  getCartBooks() {
     return this.http.get('/v1/api/cart/all');
   }
 
-  deleteByProductId(id: number) {
-    this.http.delete('/v1/api/cart/' + id).subscribe();
+  deleteByIsbn(isbn: string) {
+    this.http.delete('/v1/api/cart/' + isbn).subscribe();
   }
 }

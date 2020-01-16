@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../../api/auth.service";
+import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../../api/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     .subscribe(
       (authResponse: any) => {
         localStorage.setItem('token', authResponse.token);
-        this.router.navigate(['/products']);
+        this.router.navigate(['/books']);
         this.loading = false;
       },
       error => {

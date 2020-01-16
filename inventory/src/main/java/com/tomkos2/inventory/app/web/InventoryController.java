@@ -1,6 +1,6 @@
 package com.tomkos2.inventory.app.web;
 
-import com.tomkos2.inventory.app.domain.Product;
+import com.tomkos2.inventory.app.domain.Book;
 import com.tomkos2.inventory.app.domain.Response;
 import com.tomkos2.inventory.app.usecase.InventoryUsecase;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +19,12 @@ public class InventoryController {
   }
 
   @PostMapping("/decrease")
-  public Response decreaseProductAmount(@RequestBody Product product) {
-    return usecase.decreaseProductAmount(product);
+  public Response decreaseProductAmount(@RequestBody Book book) {
+    return usecase.decreaseBookAmount(book);
   }
 
-  @GetMapping("/id/{id}/instock")
-  public boolean isProductInStock(@PathVariable Long id) {
-    return usecase.isProductInStock(id);
+  @GetMapping("/isbn/{isbn}/instock")
+  public boolean isProductInStock(@PathVariable String isbn) {
+    return usecase.isBookInStock(isbn);
   }
 }

@@ -9,8 +9,8 @@ const routes: Routes = [
   /*  {
       path: '', canActivate: [AuthGuard], children: [
         {
-          path: 'products',
-          loadChildren: 'src/app/modules/product/product.module#ProductModule'
+          path: 'books',
+          loadChildren: 'src/app/modules/bookDetails/bookDetails.module#ProductModule'
         },
       ]
     }*/

@@ -1,9 +1,0 @@
-<div *ngIf="!productsExists()" class="image-position">
-    <img class="image" src="assets/no_products_found.png">
-</div>
-<div *ngIf="productsExists()">
-  <div *ngFor="let product of products">
-    <app-product-item [product]="product"></app-product-item>
-  </div>
-</div>
-

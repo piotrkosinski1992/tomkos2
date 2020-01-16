@@ -1,11 +1,11 @@
 package com.tomkos2.cart.app.usecase;
 
+import com.tomkos2.cart.app.domain.Book;
 import com.tomkos2.cart.app.domain.Cart;
-import com.tomkos2.cart.app.domain.Product;
 import com.tomkos2.cart.app.domain.Response;
 import com.tomkos2.cart.app.repo.CartRepository;
-import com.tomkos2.cart.app.web.ProductDTO;
-import com.tomkos2.cart.app.web.ProductsDTO;
+import com.tomkos2.cart.app.web.BookDTO;
+import com.tomkos2.cart.app.web.CartItemsDTO;
 import com.tomkos2.cart.app.web.config.UserInfo;
 import java.util.List;
 import java.util.Set;
@@ -26,39 +26,39 @@ public class CartUsecase {
   }
 
   @Transactional
-  public void addToCart(Product product, UserInfo userInfo) {
-    Response response = decreaseAmountInInventory(product);
+  public void addToCart(Book book, UserInfo userInfo) {
+    Response response = decreaseAmountInInventory(book);
     if (!response.isSuccess()) {
       throw new RuntimeException(response.getMessage());
     }
     Cart cart = findByUsername(userInfo);
-    cart.addToCart(product);
+    cart.addToCart(book);
   }
 
-  private Response decreaseAmountInInventory(Product product) {
+  private Response decreaseAmountInInventory(Book book) {
     return restTemplate
-        .postForObject("http://inventory/decrease", product, Response.class);
+        .postForObject("http://inventory/decrease", book, Response.class);
   }
 
   public void createCart(String username) {
     repository.save(new Cart(username));
   }
 
-  public List<ProductDTO> getCartProducts(UserInfo userInfo) {
+  public List<BookDTO> getCartBooks(UserInfo userInfo) {
     Cart cart = findByUsername(userInfo);
-    List<Long> ids = cart.getProducts().stream().map(Product::getId)
+    List<String> isbnList = cart.getBooks().stream().map(Book::getIsbn)
         .collect(Collectors.toList());
-    List<ProductDTO> productsInfo = restTemplate
-        .postForObject("http://product/ids", ids, ProductsDTO.class).getProducts();
+    List<BookDTO> booksInfo = restTemplate
+        .postForObject("http://book/isbn/all", isbnList, CartItemsDTO.class).getBooks();
 
-    return productsInfo.stream()
-        .map(product -> addProductAmount(product, cart.getProducts()))
+    return booksInfo.stream()
+        .map(book -> addBookAmount(book, cart.getBooks()))
         .collect(Collectors.toList());
   }
 
-  private ProductDTO addProductAmount(ProductDTO dto, Set<Product> products) {
-    products.stream()
-        .filter(p -> p.getId().equals(dto.getId()))
+  private BookDTO addBookAmount(BookDTO dto, Set<Book> books) {
+    books.stream()
+        .filter(p -> p.getIsbn().equals(dto.getIsbn()))
         .forEach(p -> dto.setAmount(p.getAmount()));
     return dto;
   }
@@ -72,7 +72,7 @@ public class CartUsecase {
 
   //TODO tu może się stać że usunie z koszyka a nie usunie z inventory
   @Transactional
-  public void deleteProductById(Long id, UserInfo userInfo) {
+  public void deleteBookById(String id, UserInfo userInfo) {
     //TODO zwracanie do inventoy
       Cart cart = findByUsername(userInfo);
 

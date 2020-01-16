@@ -1,6 +1,6 @@
 package com.tomkos2.cart.app.web;
 
-import com.tomkos2.cart.app.domain.Product;
+import com.tomkos2.cart.app.domain.Book;
 import com.tomkos2.cart.app.usecase.CartUsecase;
 import com.tomkos2.cart.app.web.config.UserInfo;
 import com.tomkos2.cart.app.web.config.WithUser;
@@ -22,8 +22,8 @@ public class CartController {
     }
 
     @PostMapping("/add")
-    public void addToCart(@RequestBody Product product, @WithUser UserInfo userInfo) {
-        usecase.addToCart(product, userInfo);
+    public void addToCart(@RequestBody Book book, @WithUser UserInfo userInfo) {
+        usecase.addToCart(book, userInfo);
     }
 
     @PostMapping("/initialize/{userId}")
@@ -32,12 +32,12 @@ public class CartController {
     }
 
     @GetMapping("/all")
-    public List<ProductDTO> getCartProducts(@WithUser UserInfo userInfo) {
-        return usecase.getCartProducts(userInfo);
+    public List<BookDTO> getCartBooks(@WithUser UserInfo userInfo) {
+        return usecase.getCartBooks(userInfo);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Long id, @WithUser UserInfo userInfo) {
-      usecase.deleteProductById(id, userInfo);
+    public void deleteById(@PathVariable String id, @WithUser UserInfo userInfo) {
+      usecase.deleteBookById(id, userInfo);
     }
 }

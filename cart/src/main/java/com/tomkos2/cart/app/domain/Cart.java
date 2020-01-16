@@ -19,7 +19,7 @@ public class Cart {
   private String username;
 
   @ElementCollection
-  private Set<Product> products = new HashSet<>();
+  private Set<Book> books = new HashSet<>();
 
   private Cart() {
   }
@@ -32,25 +32,25 @@ public class Cart {
     this.id = id;
   }
 
-  public void addToCart(Product product) {
-    if (productAlreadyInCart(product)) {
-      products.forEach(cartProduct -> {
-        if (cartProduct.getId().equals(product.getId())) {
-            cartProduct.increaseAmount(product.getAmount());
+  public void addToCart(Book book) {
+    if (bookAlreadyInCart(book)) {
+      books.forEach(cartBook -> {
+        if (cartBook.getIsbn().equals(book.getIsbn())) {
+            cartBook.increaseAmount(book.getAmount());
         }
       });
     } else {
-      products.add(product);
+      books.add(book);
     }
   }
 
-  private boolean productAlreadyInCart(Product product) {
-    return products.stream().map(Product::getId).collect(Collectors.toList())
-        .contains(product.getId());
+  private boolean bookAlreadyInCart(Book book) {
+    return books.stream().map(Book::getIsbn).collect(Collectors.toList())
+        .contains(book.getIsbn());
   }
 
-  public Set<Product> getProducts() {
-    return products;
+  public Set<Book> getBooks() {
+    return books;
   }
 
   @Override
@@ -70,8 +70,8 @@ public class Cart {
     return Objects.hash(id);
   }
 
-  public void deleteFromCartById(Long id) {
-    this.products = products.stream().filter((Product product) -> !product.getId().equals(id))
+  public void deleteFromCartById(String id) {
+    this.books = books.stream().filter((Book book) -> !book.getIsbn().equals(id))
       .collect(Collectors.toSet());
   }
 }

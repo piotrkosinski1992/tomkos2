@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CartService} from '../../../api/cart.service';
 import {MatTableDataSource} from '@angular/material/table';
-import {Product} from '../../product/product';
+import {Book} from '../../book/book';
 
 @Component({
   selector: 'app-cart-info',
@@ -10,20 +10,20 @@ import {Product} from '../../product/product';
 })
 export class CartInfoComponent implements OnInit {
 
-  dataSource = new MatTableDataSource<Product>();
+  dataSource = new MatTableDataSource<Book>();
   displayedColumns = ['id', 'name', 'price', 'amount', 'button'];
 
   constructor(private cartService: CartService) {
   }
 
   ngOnInit() {
-    this.cartService.getCartProducts().subscribe(
-      (products: any) => this.dataSource.data = products
+    this.cartService.getCartBooks().subscribe(
+      (books: any) => this.dataSource.data = books
     );
   }
 
-  onDeleteItem(id: number) {
-    this.cartService.deleteByProductId(id);
+  onDeleteItem(isbn: string) {
+    this.cartService.deleteByIsbn(isbn);
     window.location.reload();
   }
 }
