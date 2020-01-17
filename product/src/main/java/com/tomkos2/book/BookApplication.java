@@ -1,4 +1,4 @@
-package com.tomkos2.product;
+package com.tomkos2.book;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

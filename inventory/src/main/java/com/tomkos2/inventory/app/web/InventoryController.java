@@ -19,17 +19,17 @@ public class InventoryController {
   }
 
   @PostMapping("/decrease")
-  public Response decreaseProductAmount(@RequestBody Book book) {
+  public Response decreaseBookAmount(@RequestBody Book book) {
     return usecase.decreaseBookAmount(book);
   }
 
   @GetMapping("/isbn/{isbn}/instock")
-  public boolean isProductInStock(@PathVariable String isbn) {
+  public boolean isBookInStock(@PathVariable String isbn) {
     return usecase.isBookInStock(isbn);
-
+  }
 
   @PostMapping("/return")
-  public void returnProduct(@RequestBody Product product) {
-    usecase.returnProduct(product);
+  public void returnBook(@RequestBody Book book) {
+    usecase.returnBook(book);
   }
 }

@@ -75,7 +75,7 @@ public class CartUsecase {
   public void deleteBookById(String id, UserInfo userInfo) {
     //TODO zwracanie do inventoy
       Cart cart = findByUsername(userInfo);
-    restTemplate.postForObject("http://inventory/return/", product, Product.class);
+    restTemplate.postForObject("http://inventory/return/", id, String.class);
       cart.deleteFromCartById(id);
   }
 }

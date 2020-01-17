@@ -1,8 +1,8 @@
-package com.tomkos2.product.app.repo;
+package com.tomkos2.book.app.repo;
 
-import com.tomkos2.product.app.domain.Book;
-import com.tomkos2.product.app.domain.Category;
-import com.tomkos2.product.app.domain.Page;
+import com.tomkos2.book.app.domain.Book;
+import com.tomkos2.book.app.domain.Category;
+import com.tomkos2.book.app.domain.Page;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;

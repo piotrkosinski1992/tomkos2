@@ -29,4 +29,8 @@ public class Book {
         return true;
     }
 
+    public void increaseAmount(Long amount) {
+        this.amount += amount;
+    }
+
 }

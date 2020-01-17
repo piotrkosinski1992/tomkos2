@@ -1,8 +1,8 @@
-package com.tomkos2.product.app.usecase;
+package com.tomkos2.book.app.usecase;
 
-import com.tomkos2.product.app.domain.Book;
-import com.tomkos2.product.app.domain.Category;
-import com.tomkos2.product.app.repo.BookRepository;
+import com.tomkos2.book.app.domain.Book;
+import com.tomkos2.book.app.domain.Category;
+import com.tomkos2.book.app.repo.BookRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;

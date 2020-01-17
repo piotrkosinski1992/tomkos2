@@ -1,32 +1,39 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
 import {BookService} from '../../../api/book.service';
 import {Book} from '../book';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.scss']
 })
-export class BookListComponent implements OnInit, OnDestroy {
+export class BookListComponent implements OnInit {
 
-  books: Book[];
+  books$: Observable<Book[]>;
   subscription: Subscription;
+  phrase: string;
 
-  constructor(private bookService: BookService) {
+  constructor(private bookService: BookService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.subscription = this.bookService.getBooks().subscribe((books: Book[]) => {
-      this.books = books;
-    });
+    /*    this.subscription = this.bookService.getBooks().subscribe((books: Book[]) => {
+          this.books = books;
+        });*/
+
+    //this.route.queryParams.subscribe(params => this.phrase = params.phrase);
+    this.phrase = this.route.snapshot.paramMap.get('phrase');
+    this.books$ = this.bookService.searchBooksByPhrase(this.phrase);
+    // TODO ZROBIC TO NA STORA I TYLE W TEMACIE
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+  /*  ngOnDestroy() {
+      this.subscription.unsubscribe();
+    }*/
 
-  booksExists() {
-    return this.books.length > 0;
+  booksExists(books: Book[]) {
+    return books !== null && books.length > 0;
   }
 }

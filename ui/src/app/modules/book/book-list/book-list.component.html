@@ -1,8 +1,8 @@
-<div *ngIf="!booksExists()" class="image-position">
+<div *ngIf="!booksExists(books$ | async)" class="image-position">
     <img class="image" src="assets/no_products_found.png">
 </div>
-<div *ngIf="booksExists()">
-  <div *ngFor="let book of books">
+<div *ngIf="booksExists(books$ | async)">
+  <div *ngFor="let book of books$ | async">
     <app-book-item [book]="book"></app-book-item>
   </div>
 </div>

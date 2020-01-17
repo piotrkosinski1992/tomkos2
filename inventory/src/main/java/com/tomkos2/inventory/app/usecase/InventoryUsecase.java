@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 public class InventoryUsecase {
 
     public boolean isBookInStock(String id) {
-        Book book = findById(id);
+        Book book = findByIsbn(id);
         return book.getAmount() > 0;
     }
 
     @Transactional
     public Response decreaseBookAmount(Book book) {
-        Book inventoryBook = findById(book.getIsbn());
+        Book inventoryBook = findByIsbn(book.getIsbn());
         if (!inventoryBook.decreaseAmount(book.getAmount())) {
             return Response.Error(
               "There is less book than requested inside inventory: " + inventoryBook
@@ -24,14 +24,13 @@ public class InventoryUsecase {
         return Response.Ok();
     }
 
-    private Book findById(String isbn) {
+    private Book findByIsbn(String isbn) {
         return new Book(isbn, Long.valueOf(isbn.substring(isbn.length() - 1)));
     }
 
-  @Transactional
-  public void returnProduct(Product product) {
-    Product dbProduct = findById(product.getId());
-
-    dbProduct.increaseAmount(product.getAmount());
-  }
+    @Transactional
+    public void returnBook(Book book) {
+        Book dbBook = findByIsbn(book.getIsbn());
+        dbBook.increaseAmount(dbBook.getAmount());
+    }
 }

@@ -10,6 +10,10 @@ import {AuthInterceptor} from './modules/base/login/auth-interceptor.service';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {CartModule} from './modules/cart/cart.module';
 import {BookModule} from './modules/book/book.module';
+import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {environment} from '../environments/environment.prod';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,12 @@ import {BookModule} from './modules/book/book.module';
     BrowserAnimationsModule,
     BaseModule,
     BookModule,
-    CartModule
+    CartModule,
+    // StoreModule.forRoot(),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({
+      logOnly: environment.production
+    }),
   ],
   providers: [BookService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

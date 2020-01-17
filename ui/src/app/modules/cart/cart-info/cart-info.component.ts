@@ -21,7 +21,7 @@ export class CartInfoComponent implements OnInit {
     this.cartService.getCartBooks().subscribe(
       (books: any) => {
         this.dataSource.data = books;
-        this.total = this.calculatePrice()
+        this.total = this.calculatePrice();
       }
     );
   }
@@ -32,7 +32,10 @@ export class CartInfoComponent implements OnInit {
   }
 
   calculatePrice() {
-    return this.dataSource.data.map(product => product.amount * product.price)
+    // TODO zmiana price na backendzie bez dollara
+    return this.dataSource.data.map(book => book.amount * book.price)
     .reduce((sum, current) => sum + current);
   }
 }
+
+

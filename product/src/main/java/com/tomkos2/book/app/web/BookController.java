@@ -1,7 +1,7 @@
-package com.tomkos2.product.app.web;
+package com.tomkos2.book.app.web;
 
-import com.tomkos2.product.app.domain.Category;
-import com.tomkos2.product.app.usecase.BookUsecase;
+import com.tomkos2.book.app.domain.Category;
+import com.tomkos2.book.app.usecase.BookUsecase;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package com.tomkos2.product.app.domain;
+package com.tomkos2.book.app.domain;
 
 import java.math.BigDecimal;
 import javax.persistence.Column;

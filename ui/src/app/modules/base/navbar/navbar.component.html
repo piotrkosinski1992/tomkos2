@@ -9,7 +9,7 @@
       <li class="navigation-item">
         <a>
           <mat-form-field class="search-form-field">
-            <input class="search-input" matInput type="text" #input>
+            <input class="search-input" matInput type="text" value="java" #input>
             <button mat-raised-button (click)="onSearchClick(input.value)"
                     [routerLink]="['/books']"
                     [queryParams]="{phrase: input.value}"

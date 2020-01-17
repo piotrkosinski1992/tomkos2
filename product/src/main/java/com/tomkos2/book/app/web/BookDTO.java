@@ -1,26 +1,22 @@
-package com.tomkos2.product.app.domain;
+package com.tomkos2.book.app.web;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+public class BookDTO {
 
-public class Book {
-
-    @JsonProperty("isbn13")
     private String isbn;
     private String title;
     private String subtitle;
     private String price;
     private String image;
-    private BookDetails details;
 
-    public Book() {
+    public BookDTO() {
     }
 
-    public BookDetails getDetails() {
-        return details;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setDetails(BookDetails details) {
-        this.details = details;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getTitle() {
@@ -37,14 +33,6 @@ public class Book {
 
     public void setSubtitle(String subtitle) {
         this.subtitle = subtitle;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
     }
 
     public String getPrice() {

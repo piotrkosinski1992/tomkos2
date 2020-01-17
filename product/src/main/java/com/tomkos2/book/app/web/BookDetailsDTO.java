@@ -1,4 +1,4 @@
-package com.tomkos2.product.app.web;
+package com.tomkos2.book.app.web;
 
 import java.util.HashMap;
 import java.util.Map;

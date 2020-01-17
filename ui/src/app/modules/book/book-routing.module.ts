@@ -4,7 +4,7 @@ import {BookListComponent} from './book-list/book-list.component';
 import {BookDetailsComponent} from './book-details/book-details.component';
 
 const routes: Routes = [
-  {path: 'books', component: BookListComponent},
+  {path: 'books/search/:phrase', component: BookListComponent},
   {path: 'books/:id', component: BookDetailsComponent}
 ];
 
