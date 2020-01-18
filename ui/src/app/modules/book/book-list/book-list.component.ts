@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
-import {BookService} from '../../../api/book.service';
+import {Observable} from 'rxjs';
 import {Book} from '../book';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {BookState} from '../store/book.reducers';
+import {select, Store} from '@ngrx/store';
+import * as bookActions from '../store/book.actions';
+import * as bookSelectors from '../store/book.selectors';
 
 @Component({
   selector: 'app-book-list',
@@ -12,28 +15,27 @@ import {ActivatedRoute} from '@angular/router';
 export class BookListComponent implements OnInit {
 
   books$: Observable<Book[]>;
-  subscription: Subscription;
   phrase: string;
 
-  constructor(private bookService: BookService, private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private store: Store<BookState>, private router: Router) {
+    route.params.subscribe(params => {
+      if (params.phrase === undefined) {
+        this.store.dispatch(new bookActions.TryLoadNewestBooks());
+      } else {
+        this.store.dispatch(new bookActions.TryLoadBooksByPhrase(params.phrase));
+      }
+    });
   }
 
   ngOnInit() {
-    /*    this.subscription = this.bookService.getBooks().subscribe((books: Book[]) => {
-          this.books = books;
-        });*/
-
-    //this.route.queryParams.subscribe(params => this.phrase = params.phrase);
-    this.phrase = this.route.snapshot.paramMap.get('phrase');
-    this.books$ = this.bookService.searchBooksByPhrase(this.phrase);
-    // TODO ZROBIC TO NA STORA I TYLE W TEMACIE
+    this.books$ = this.store.pipe(select(bookSelectors.getBooks));
   }
-
-  /*  ngOnDestroy() {
-      this.subscription.unsubscribe();
-    }*/
 
   booksExists(books: Book[]) {
     return books !== null && books.length > 0;
+  }
+
+  onBookClicked(book: Book) {
+    this.router.navigate(['/books/', book.isbn]);
   }
 }

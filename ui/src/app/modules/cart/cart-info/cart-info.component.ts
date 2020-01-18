@@ -1,41 +1,52 @@
-import {Component, OnInit} from '@angular/core';
-import {CartService} from '../../../api/cart.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import {Book} from '../../book/book';
+import {CartItem} from '../cart-item';
+import {CartState} from '../store/cart.reducers';
+import {select, Store} from '@ngrx/store';
+import * as cartActions from '../store/cart.actions';
+import * as cartSelectors from '../store/cart.selectors';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-cart-info',
   templateUrl: './cart-info.component.html',
   styleUrls: ['./cart-info.component.scss']
 })
-export class CartInfoComponent implements OnInit {
+export class CartInfoComponent implements OnInit, OnDestroy {
 
-  dataSource = new MatTableDataSource<Book>();
-  displayedColumns = ['id', 'name', 'price', 'amount', 'button'];
+  dataSource = new MatTableDataSource<CartItem>();
+  displayedColumns = ['isbn', 'title', 'price', 'amount', 'button'];
+  subscription: Subscription;
   total = 0;
 
-  constructor(private cartService: CartService) {
+  constructor(private store: Store<CartState>) {
   }
 
   ngOnInit() {
-    this.cartService.getCartBooks().subscribe(
-      (books: any) => {
-        this.dataSource.data = books;
-        this.total = this.calculatePrice();
+    this.store.dispatch(new cartActions.TryLoadCart());
+    this.subscription = this.store.pipe(select(cartSelectors.getCart)).subscribe(
+      (cartItems: CartItem[]) => {
+        this.dataSource.data = cartItems;
+        // this.total = this.calculatePrice(cartItems);
       }
     );
   }
 
   onDeleteItem(isbn: string) {
-    this.cartService.deleteByIsbn(isbn);
+    this.store.dispatch(new cartActions.TryRemoveFromCart(isbn));
+    // TODO da się zrobić jakiś refresh na selectorze?
     window.location.reload();
   }
 
-  calculatePrice() {
-    // TODO zmiana price na backendzie bez dollara
-    return this.dataSource.data.map(book => book.amount * book.price)
-    .reduce((sum, current) => sum + current);
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
+
+  //TODO nie działa bo dane przychodzą z opóźnieniem?
+/*  calculatePrice(cartItems: CartItem[]) {
+    return cartItems.map(item => item.amount * item.book.price)
+    .reduce((sum, current) => sum + current);
+  }*/
 }
 
 

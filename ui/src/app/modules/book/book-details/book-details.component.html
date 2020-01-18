@@ -1,20 +1,24 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>{{bookDetails.title}}</mat-card-title>
+    <mat-card-title>Title: {{(bookDetails$ | async).title}}</mat-card-title>
   </mat-card-header>
   <mat-card-content fxLayout>
     <div fxFlex="30%">
-      <img class="img" src="assets/guitar.jpg">
+      <img src="{{(bookDetails$ | async).image}}">
     </div>
     <div fxFlex="70%">
       <mat-list role="list">
         <mat-list-item role="listitem">
-          <div fxFlex="30%"><strong>Description: </strong></div>
-          <div fxFlex>{{bookDetails.desc}}</div>
+          <div fxFlex="30%"><strong>Authors: </strong></div>
+          <div fxFlex>{{(bookDetails$ | async).authors}}</div>
         </mat-list-item>
         <mat-list-item role="listitem">
-          <div fxFlex="30%"><strong>Price: </strong></div>
-          <div fxFlex>{{bookDetails.price}}</div>
+          <div fxFlex="30%"><strong>Publisher: </strong></div>
+          <div fxFlex>{{(bookDetails$ | async).publisher}}</div>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <div fxFlex="30%"><strong>Year: </strong></div>
+          <div fxFlex>{{(bookDetails$ | async).year}}</div>
         </mat-list-item>
         <mat-list-item role="listitem">
           <div fxFlex="30%" class="button-container">
@@ -28,8 +32,20 @@
         </mat-list-item>
         <mat-list-item>
           <div>
-            <button color="warn" mat-raised-button fxFlex="30%" (click)="onBackClick()">Back</button>
+            <button color="warn" mat-raised-button fxFlex="30%" (click)="onBackClick()">Back
+            </button>
           </div>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <div fxFlex="30%"><strong>Price: </strong></div>
+          <div fxFlex>${{(bookDetails$ | async).price}}</div>
+        </mat-list-item>
+        <mat-list-item role="listitem" class="description">
+          <div fxFlex="30%"><strong>Description: </strong></div>
+          <div fxFlex>{{(bookDetails$ | async).desc}}</div>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <div fxFlex="30%"></div>
         </mat-list-item>
       </mat-list>
     </div>

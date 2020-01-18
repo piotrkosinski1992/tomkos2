@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../api/auth.service';
-import {BookService} from '../../../api/book.service';
 import {Router} from '@angular/router';
+import {Store} from '@ngrx/store';
+import {BookState} from '../../book/store/book.reducers';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,7 @@ import {Router} from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private authService: AuthService, private bookService: BookService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private store: Store<BookState>) {
   }
 
   ngOnInit() {
@@ -20,9 +21,8 @@ export class NavbarComponent implements OnInit {
     this.authService.logout();
   }
 
-  onSearchClick(searchString: string) {
-    this.router.navigate(['/books/search/', searchString], );
-    // this.bookService.searchBooksByPhrase(searchString);
+  onSearchClick(phrase: string) {
+    this.router.navigate(['/books/search/', phrase]);
   }
 
   isInputEmpty(value: string) {

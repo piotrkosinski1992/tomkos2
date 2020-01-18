@@ -1,17 +1,17 @@
 <mat-table [dataSource]="dataSource">
-  <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+  <ng-container matColumnDef="isbn">
+    <mat-header-cell *matHeaderCellDef>Isbn</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.book.isbn}}</mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.book.title}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="price">
     <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element.price}}</mat-cell>
+    <mat-cell *matCellDef="let element">${{element.book.price}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="amount">
@@ -21,12 +21,12 @@
   <ng-container matColumnDef="button">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <button mat-raised-button color="warn" (click)="onDeleteItem(element)">Delete</button>
+      <button mat-raised-button color="warn" (click)="onDeleteItem(element.book.isbn)">Delete</button>
     </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
 <div>
-  <mat-card>Total: {{total}}</mat-card>
+  <mat-card>Total: ${{total}}</mat-card>
 </div>

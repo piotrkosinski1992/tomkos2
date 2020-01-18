@@ -3,7 +3,7 @@
 </div>
 <div *ngIf="booksExists(books$ | async)">
   <div *ngFor="let book of books$ | async">
-    <app-book-item [book]="book"></app-book-item>
+    <app-book-item (click)="onBookClicked(book)" [book]="book"></app-book-item>
   </div>
 </div>
 

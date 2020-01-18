@@ -1,1 +1,1 @@
-tutaj brakuje rzeczy z obiektów zwracanych z externala return usecase.findLike(phrase).stream()
+Bombardowanie błędami w consoli bo dane z observabli przychodzą z opóźnieniem

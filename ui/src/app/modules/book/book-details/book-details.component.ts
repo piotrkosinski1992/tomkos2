@@ -1,8 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {CartService} from '../../../api/cart.service';
-import {Location} from '@angular/common';
 import {BookDetails} from '../book-details';
+import {Observable} from 'rxjs';
+import {select, Store} from '@ngrx/store';
+import * as bookSelectors from '../store/book.selectors';
+import {BookState} from '../store/book.reducers';
+import {Location} from '@angular/common';
+import * as cartActions from '../../cart/store/cart.actions';
+import * as bookActions from '../store/book.actions';
+import {ActivatedRoute} from '@angular/router';
+import {CartState} from '../../cart/store/cart.reducers';
 
 @Component({
   selector: 'app-book-details',
@@ -11,19 +17,21 @@ import {BookDetails} from '../book-details';
 })
 export class BookDetailsComponent implements OnInit {
 
-  bookDetails: BookDetails;
+  bookDetails$: Observable<BookDetails>;
+  isbn: string;
 
-  constructor(private activatedRoute: ActivatedRoute, private location: Location, private cartService: CartService) {
+  constructor(private bookStore: Store<BookState>, private cartStore: Store<CartState>,
+              private location: Location, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe((bookDetails: BookDetails) => {
-      this.bookDetails = bookDetails;
-    });
+    this.isbn = this.route.snapshot.paramMap.get('isbn');
+    this.bookStore.dispatch(new bookActions.TryLoadBookDetails(this.isbn));
+    this.bookDetails$ = this.bookStore.pipe(select(bookSelectors.getBookDetails));
   }
 
   onBuyClick(amount: string) {
-    this.cartService.addToCart(this.bookDetails.isbn, amount);
+    this.cartStore.dispatch(new cartActions.TryAddToCart(this.isbn, amount));
   }
 
   onBackClick() {

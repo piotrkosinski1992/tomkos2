@@ -10,17 +10,14 @@ export class CartService {
   }
 
   addToCart(isbn: string, amount: string) {
-    this.http.post('/v1/api/cart/add', {isbn: isbn, amount: amount}).subscribe(
-      () => alert('Book added to cart!'),
-      error => alert(error.error.message)
-    );
+    return this.http.post('/v1/api/cart/add', {isbn: isbn, amount: amount});
   }
 
-  getCartBooks() {
+  getCart() {
     return this.http.get('/v1/api/cart/all');
   }
 
-  deleteByIsbn(isbn: string) {
-    this.http.delete('/v1/api/cart/' + isbn).subscribe();
+  removeByIsbn(isbn: string) {
+    return this.http.delete('/v1/api/cart/' + isbn);
   }
 }
