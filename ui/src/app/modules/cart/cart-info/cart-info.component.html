@@ -21,7 +21,8 @@
   <ng-container matColumnDef="button">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <button mat-raised-button color="warn" (click)="onDeleteItem(element.book.isbn)">Delete</button>
+      <button mat-raised-button color="warn" (click)="onDeleteItem(element.book.isbn)">Delete
+      </button>
     </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -29,4 +30,7 @@
 </mat-table>
 <div>
   <mat-card>Total: ${{total}}</mat-card>
+  <mat-card>
+    <button color="warn" mat-raised-button [routerLink]="['/books']">Back</button>
+  </mat-card>
 </div>

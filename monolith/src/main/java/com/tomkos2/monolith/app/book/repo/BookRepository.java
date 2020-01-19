@@ -2,7 +2,6 @@ package com.tomkos2.monolith.app.book.repo;
 
 import com.tomkos2.monolith.app.book.domain.Book;
 import com.tomkos2.monolith.app.book.domain.BookDetails;
-import com.tomkos2.monolith.app.book.domain.Category;
 import com.tomkos2.monolith.app.book.domain.Page;
 import java.util.Arrays;
 import java.util.List;
@@ -25,12 +24,6 @@ public class BookRepository {
   public BookRepository(RestTemplate restTemplate) {
     this.restTemplate = restTemplate;
     this.headers = addHeaders(this.restTemplate);
-  }
-
-  public List<Book> findByCategory(Category category) {
-    return restTemplate
-        .exchange(URL + "/search/" + category.name(), HttpMethod.GET,
-            headers, Page.class).getBody().getBooks();
   }
 
   public List<Book> findLike(String phrase) {

@@ -42,11 +42,11 @@ export class CartInfoComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  //TODO nie działa bo dane przychodzą z opóźnieniem?
-/*  calculatePrice(cartItems: CartItem[]) {
-    return cartItems.map(item => item.amount * item.book.price)
-    .reduce((sum, current) => sum + current);
-  }*/
+  // TODO nie działa bo dane przychodzą z opóźnieniem?
+  /*  calculatePrice(cartItems: CartItem[]) {
+      return cartItems.map(item => item.amount * item.book.price)
+      .reduce((sum, current) => sum + current);
+    }*/
 }
 
 

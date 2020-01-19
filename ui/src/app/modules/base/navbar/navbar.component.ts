@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../api/auth.service';
 import {Router} from '@angular/router';
-import {Store} from '@ngrx/store';
-import {BookState} from '../../book/store/book.reducers';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +9,7 @@ import {BookState} from '../../book/store/book.reducers';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router, private store: Store<BookState>) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   ngOnInit() {
@@ -19,6 +17,7 @@ export class NavbarComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   onSearchClick(phrase: string) {

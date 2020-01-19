@@ -17,7 +17,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.clear()
+    localStorage.clear();
   }
 
   getToken() {

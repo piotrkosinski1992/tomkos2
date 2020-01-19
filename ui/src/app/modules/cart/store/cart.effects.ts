@@ -7,19 +7,21 @@ import {CartActionTypes, TryAddToCart, TryRemoveFromCart} from './cart.actions';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {CartService} from '../../../api/cart.service';
 import {CartItem} from '../cart-item';
+import {Router} from '@angular/router';
 
 
 @Injectable()
 export class CartEffects {
 
-  constructor(private actions$: Actions, private cartService: CartService) {
+  constructor(private actions$: Actions, private cartService: CartService, private router: Router) {
   }
 
   @Effect()
   addCartItem: Observable<Action> = this.actions$.pipe(ofType(CartActionTypes.TRY_ADD_TO_CART),
     mergeMap((actionInput: TryAddToCart) => this.cartService.addToCart(actionInput.isbn, actionInput.amount).pipe(
       map(() => {
-        alert('Book added to cart!')
+        alert('Book added to cart!');
+        this.router.navigate(['/cart']);
         return new cartActions.AddToCartSuccess();
       }),
       catchError(err => {

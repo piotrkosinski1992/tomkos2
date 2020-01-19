@@ -17,6 +17,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/books']);
+    }
+
     this.loginForm = this.formBuilder.group({
       username: ['user', Validators.required],
       password: ['user', Validators.required]
@@ -36,7 +40,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/books']);
         this.loading = false;
       },
-      error => {
+      () => {
         this.loading = false;
       });
   }

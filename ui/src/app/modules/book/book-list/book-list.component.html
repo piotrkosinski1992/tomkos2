@@ -1,9 +1,12 @@
-<div *ngIf="!booksExists(books$ | async)" class="image-position">
+<div fxLayout="row" fxLayoutGap="10">
+  <app-book-categories fxFlex="20%"></app-book-categories>
+  <div fxFlex="80%" *ngIf="!booksExists(books$ | async)" class="image-position">
     <img class="image" src="assets/no_products_found.png">
-</div>
-<div *ngIf="booksExists(books$ | async)">
-  <div *ngFor="let book of books$ | async">
-    <app-book-item (click)="onBookClicked(book)" [book]="book"></app-book-item>
   </div>
-</div>
+  <div fxFlex="80%" *ngIf="booksExists(books$ | async)">
+    <div *ngFor="let book of books$ | async">
+      <app-book-item (click)="onBookClicked(book)" [book]="book"></app-book-item>
+    </div>
+  </div>
 
+</div>
