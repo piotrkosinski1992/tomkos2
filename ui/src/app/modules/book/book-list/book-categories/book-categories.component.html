@@ -1,0 +1,7 @@
+<mat-card class="categories">
+  <div *ngFor="let category of categories$ | async">
+    <mat-card-subtitle [routerLink]="['/books/search/' + category.name]">
+      <p class="category">{{category.name}}</p>
+    </mat-card-subtitle>
+  </div>
+</mat-card>

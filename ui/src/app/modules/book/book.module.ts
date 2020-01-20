@@ -12,7 +12,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {bookFeature} from './store/book.selectors';
 import {bookReducers} from './store/book.reducers';
 import {BookEffects} from './store/book.effects';
-import { BookCategoriesComponent } from './book-list/book-categories/book-categories.component';
+import {BookCategoriesComponent} from './book-list/book-categories/book-categories.component';
 
 
 @NgModule({

@@ -46,7 +46,6 @@ public class MonolithApplication implements CommandLineRunner {
     categoryRepository.save(new Category("SWIFT"));
     categoryRepository.save(new Category("LINUX"));
     categoryRepository.save(new Category("PERL"));
-    categoryRepository.save(new Category("LINUX"));
     categoryRepository.save(new Category("CSS"));
   }
 }
