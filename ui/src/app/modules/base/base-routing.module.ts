@@ -1,19 +1,24 @@
 import {RouterModule, Routes} from '@angular/router';
-import {LoginComponent} from './login/login.component';
 import {NgModule} from '@angular/core';
+import {AuthGuard} from './login/auth.guard';
 
 const routes: Routes = [
-  {path: 'login', component: LoginComponent},
-  {path: 'logout', redirectTo: 'login'},
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
-  /*    {
-        path: '', canActivate: [AuthGuard], children: [
-          {
-            path: 'books',
-            loadChildren: 'src/app/modules/book/book.module#BookModule'
-          },
-        ]
-      }*/
+  {
+    path: 'cart', canActivate: [AuthGuard], children: [
+      {
+        path: '',
+        loadChildren: 'src/app/modules/cart/cart.module#CartModule'
+      },
+    ]
+  },
+  {
+    path: 'books', canActivate: [AuthGuard], children: [
+      {
+        path: '',
+        loadChildren: 'src/app/modules/book/book.module#BookModule'
+      },
+    ]
+  }
 ];
 
 

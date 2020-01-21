@@ -4,9 +4,9 @@ import {BookListComponent} from './book-list/book-list.component';
 import {BookDetailsComponent} from './book-details/book-details.component';
 
 const routes: Routes = [
-  {path: 'books/search/:phrase', component: BookListComponent},
-  {path: 'books/:isbn', component: BookDetailsComponent},
-  {path: 'books', component: BookListComponent} // TODO newest?
+  {path: 'search/:phrase', component: BookListComponent},
+  {path: ':isbn', component: BookDetailsComponent},
+  {path: '', component: BookListComponent}
 ];
 
 

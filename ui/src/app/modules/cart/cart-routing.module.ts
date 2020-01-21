@@ -4,7 +4,7 @@ import {CartInfoComponent} from './cart-info/cart-info.component';
 import {AuthGuard} from '../base/login/auth.guard';
 
 const routes: Routes = [
-  {path: 'cart', component: CartInfoComponent, canActivate: [AuthGuard]}
+  {path: '', component: CartInfoComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

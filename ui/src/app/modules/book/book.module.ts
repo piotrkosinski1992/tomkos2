@@ -23,6 +23,7 @@ import {BookCategoriesComponent} from './book-list/book-categories/book-categori
     BaseRoutingModule,
     HttpClientModule,
     BookRoutingModule,
+    MaterialModule,
     StoreModule.forFeature(bookFeature, bookReducers),
     EffectsModule.forFeature([BookEffects]),
   ]

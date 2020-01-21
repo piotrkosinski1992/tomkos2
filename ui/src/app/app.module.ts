@@ -5,8 +5,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BaseModule} from './modules/base/base.module';
-import {CartModule} from './modules/cart/cart.module';
-import {BookModule} from './modules/book/book.module';
 import {StoreModule} from '@ngrx/store';
 import {routerReducer} from '@ngrx/router-store';
 import {environment} from '../environments/environment';
@@ -22,8 +20,6 @@ import {EffectsModule} from '@ngrx/effects';
     AppRoutingModule,
     BrowserAnimationsModule,
     BaseModule,
-    BookModule,
-    CartModule,
     StoreModule.forRoot({router: routerReducer}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
